@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  if: false # Disable the SFTP workflow until server ready
   deploy:
     name: Build and deploy via SFTP
     runs-on: ubuntu-latest
