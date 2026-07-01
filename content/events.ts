@@ -22,6 +22,7 @@ export const events: CalendarEvent[] = [
     { date: "2026-08-08", title: "Bodi's heist",          notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
   { date: "2026-08-09", title: "Bodi's second heist",          notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
   { date: "2026-08-16", title: "Bodi's 3rd heist",          notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
+  { date: "2026-08-18", title: "Nedry's Special Meeting",          notes: "Ah ah ah, you didn't say the magic word." },
   /**
   END: UPDATE HERE
   **/
