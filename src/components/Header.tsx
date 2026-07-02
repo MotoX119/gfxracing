@@ -7,7 +7,7 @@ const navLinks = [
   { href: '#about',      label: 'About'           },
   { href: '#membership', label: 'Membership'      },
   { href: '#classes',    label: 'Classes & Rules' },
-  { href: '#shop',       label: 'Shop'            },
+  // { href: '#shop',       label: 'Shop'            },
 ];
 
 const SECTION_IDS = navLinks.map((l) => l.href.slice(1));
