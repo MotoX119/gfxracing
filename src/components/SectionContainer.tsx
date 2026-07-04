@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 
 export default function SectionContainer({ id, className, isStriped, children }: { id: string; className?: string; isStriped?: boolean; children: React.ReactNode }) {
-  const classNameCombined = twMerge("py-20 border-t border-white/5", isStriped && "bg-[#0d0d0d] racing-stripe", className);
+  const classNameCombined = twMerge("py-30 border-t border-white/5", isStriped && "bg-[#0d0d0d] racing-stripe", className);
 
   return (
     <section className={classNameCombined} id={id}>

@@ -45,7 +45,7 @@ const plans = [
 
 export default function MembershipSection() {
   return (
-    <SectionContainer id="membership">
+    <SectionContainer id="membership" isStriped={true}>
         <SectionHeader title="Membership &amp; Pricing" />
 
         {/* Pricing cards */}

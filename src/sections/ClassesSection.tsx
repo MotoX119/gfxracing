@@ -64,7 +64,7 @@ function ScaleCard({ scale, subtitle, classes }: ScaleCardProps) {
 
 export default function ClassesSection() {
   return (
-    <SectionContainer id="classes" isStriped={true}>
+    <SectionContainer id="classes" isStriped={false}>
         <SectionHeader title="Classes &amp; Rules" />
         
         <div className="mb-14 text-center">
