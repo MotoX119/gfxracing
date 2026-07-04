@@ -1,13 +1,12 @@
-import BrandBadge from './BrandBadge';
-import BrandText from './BrandText';
+import BrandBadge from "./BrandBadge";
+import BrandText from "./BrandText";
 
 const footerLinks = [
-  { href: '#home',       label: 'Home'            },
-  { href: '#schedule',   label: 'Schedule'        },
-  { href: '#about',      label: 'About'           },
-  { href: '#membership', label: 'Membership'      },
-  { href: '#classes',    label: 'Classes & Rules' },
-  { href: '#shop',       label: 'Shop'            },
+  { href: "#home",       label: "Home"            },
+  { href: "#schedule",   label: "Schedule"        },
+  { href: "#about",      label: "About"           },
+  { href: "#membership", label: "Membership"      },
+  { href: "#classes",    label: "Classes & Rules" },
 ];
 
 export default function Footer() {
@@ -17,14 +16,9 @@ export default function Footer() {
     <footer className="bg-track border-t-2 border-red-600">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-3 gap-8 mb-8">
-
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-2">
-              {/* <BrandBadge className="w-7 h-8 shrink-0" />
-              <p className="font-brand italic text-2xl font-black text-white uppercase leading-none">
-                GFX<span className="text-red-500 mr-1">★</span>RACING
-              </p> */}
               <BrandBadge className="h-6 w-7" />
               <BrandText className="h-6" />
             </div>
