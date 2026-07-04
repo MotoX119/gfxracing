@@ -1,18 +1,19 @@
-interface Props {
-  /** Full address shown as a caption below the map */
-  address?: string;
-  /** Iframe height in pixels */
-  height?: number;
-}
+import { twMerge } from "tailwind-merge";
 
 export default function MapEmbed({
   address = '2481 Kaladar Ave, Ottawa, ON',
   height = 320,
-}: Props) {
+  className
+}: {
+  address?: string;
+  height?: number;
+  className?: string;
+}) {
   const query = encodeURIComponent(address);
+  const classNameCombined = twMerge("rounded-lg overflow-hidden border border-white/10", className);
 
   return (
-    <figure className="rounded-lg overflow-hidden border border-white/10">
+    <figure className={classNameCombined}>
       <iframe
         src={`https://maps.google.com/maps?q=${query}&output=embed&z=16`}
         width="100%"

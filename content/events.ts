@@ -17,13 +17,14 @@ export interface CalendarEvent {
 
 export const events: CalendarEvent[] = [
   /**
-  UPDATE HERE
+  INSTRUCTIONS:
+  1. Copy and paste a row below to use as a template
+  2. Update the related values (between qoutes)
   **/
-    { date: "2026-08-08", title: "Bodi's heist",          notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
-  { date: "2026-08-09", title: "Bodi's second heist",          notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
-  { date: "2026-08-16", title: "Bodi's 3rd heist",          notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
-  { date: "2026-08-18", title: "Nedry's Special Meeting",          notes: "Ah ah ah, you didn't say the magic word." },
-  /**
-  END: UPDATE HERE
-  **/
+  { date: "2026-07-08", title: "Pete's Peppers!", notes: "I can't believe it either! Pete's peppers!" },
+  { date: "2026-07-09", title: "Hiss's Disk", notes: "Legendary! Simply legendary." },  
+  { date: "2026-07-10", title: "Bodi's heist", notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
+  { date: "2026-08-09", title: "Bodi's second heist", notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
+  { date: "2026-08-16", title: "Bodi's 3rd heist", notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
+  { date: "2026-08-18", title: "Nedry's Special Meeting", notes: "Ah ah ah, you didn't say the magic word." },
 ];

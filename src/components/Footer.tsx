@@ -1,4 +1,5 @@
 import BrandBadge from './BrandBadge';
+import BrandText from './BrandText';
 
 const footerLinks = [
   { href: '#home',       label: 'Home'            },
@@ -20,10 +21,12 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-2">
-              <BrandBadge className="w-7 h-8 shrink-0" />
+              {/* <BrandBadge className="w-7 h-8 shrink-0" />
               <p className="font-brand italic text-2xl font-black text-white uppercase leading-none">
                 GFX<span className="text-red-500 mr-1">★</span>RACING
-              </p>
+              </p> */}
+              <BrandBadge className="h-6 w-7" />
+              <BrandText className="h-6" />
             </div>
             <p className="text-xs text-zinc-500 leading-relaxed mt-1">
               Indoor 1/28 &middot; 1/10 &amp; 1/12<br />

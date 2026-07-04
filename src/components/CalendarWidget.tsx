@@ -1,9 +1,7 @@
 import { useState, useMemo, useRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 import type { CalendarEvent } from '../../content/events';
 
-interface Props {
-  events: CalendarEvent[];
-}
 
 // APG: abbreviated display labels + full name in abbr attribute for screen readers
 const DAY_LABELS = [
@@ -44,7 +42,7 @@ function clampDay(year: number, month: number, day: number): number {
 
 const HEADING_ID = 'cal-month-heading';
 
-export default function CalendarWidget({ events }: Props) {
+export default function CalendarWidget({ events, className }: {events: CalendarEvent[]; className: string;}) {
   const today = useMemo(() => new Date(), []);
   const [view, setView] = useState({ year: today.getFullYear(), month: today.getMonth() });
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
@@ -208,157 +206,159 @@ export default function CalendarWidget({ events }: Props) {
       ? `${selectedDay} ${MONTH_NAMES[month]}`
       : `${MONTH_NAMES[month]} ${year}`;
 
+  const classNameCombined = twMerge("rounded-lg border border-white/10 bg-surface overflow-hidden", className);
+
   return (
-    <div className="rounded-lg border border-white/10 bg-surface overflow-hidden">
+    <div className={classNameCombined}>
 
-      {/* ── Month navigation ──────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between px-4 pt-4 pb-2">
-        <button
-          type="button"
-          onClick={prevMonth}
-          aria-label="Previous month"
-          className="p-1.5 rounded-md text-zinc-400 hover:bg-white/10 hover:text-white text-lg leading-none transition-colors"
-        >
-          ‹
-        </button>
-        <h3
-          id={HEADING_ID}
-          aria-live="polite"
-          aria-atomic="true"
-          className="text-sm font-semibold text-white"
-        >
-          {MONTH_NAMES[month]} {year}
-        </h3>
-        <button
-          type="button"
-          onClick={nextMonth}
-          aria-label="Next month"
-          className="p-1.5 rounded-md text-zinc-400 hover:bg-white/10 hover:text-white text-lg leading-none transition-colors"
-        >
-          ›
-        </button>
-      </div>
-
-      {/* ── Day grid ──────────────────────────────────────────────────────── */}
-      {/*
-          APG grid pattern:
-          • role="grid" on <table> (already implied by thead/tbody structure)
-          • aria-labelledby points to the live month heading
-          • Only ONE cell is tabindex=0 at a time (roving tabindex)
-          • Arrow / Home / End / PageUp / PageDown handled in onKeyDown
-          • aria-selected on <td> marks the user-chosen day
-          • abbr on <th> provides full day name to screen readers
-      */}
-      <table
-        className="w-full px-4 pb-3"
-        role="grid"
-        aria-labelledby={HEADING_ID}
-      >
-        <thead>
-          <tr>
-            {DAY_LABELS.map(({ short, full }) => (
-              <th
-                key={full}
-                scope="col"
-                abbr={full}
-                className="text-center text-xs font-medium text-zinc-500 pb-1.5 w-10"
-              >
-                {short}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody ref={tbodyRef}>
-          {weeks.map((week, wi) => (
-            <tr key={wi}>
-              {week.map((day, di) => {
-                if (day === null) {
-                  // Empty padding cell — not interactive, excluded from tab order
-                  return <td key={di} aria-disabled="true" className="w-10 h-10" />;
-                }
-
-                const dayEvents  = eventsOnDay(day);
-                const todayFlag  = isToday(day);
-                const selected   = selectedDay === day;
-                const isFocused  = focusedDay === day;
-                const hasEvents  = dayEvents.length > 0;
-
-                return (
-                  <td
-                    key={di}
-                    className="w-10 h-10 text-center p-0.5"
-                    aria-selected={selected || undefined}
-                  >
-                    <button
-                      type="button"
-                      data-day={day}
-                      tabIndex={isFocused ? 0 : -1}
-                      onFocus={() => setFocusedDay(day)}
-                      onClick={() => setSelectedDay(selected ? null : day)}
-                      onKeyDown={(e) => handleKeyDown(e, day)}
-                      aria-label={[
-                        `${day} ${MONTH_NAMES[month]} ${year}`,
-                        todayFlag ? 'today' : '',
-                        hasEvents
-                          ? `${dayEvents.length} event${dayEvents.length > 1 ? 's' : ''}`
-                          : '',
-                      ].filter(Boolean).join(', ')}
-                      aria-pressed={selected}
-                      className={[
-                        'relative mx-auto flex items-center justify-center w-8 h-8 rounded-full text-sm transition-colors',
-                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-1 focus-visible:ring-offset-surface',
-                        todayFlag
-                          ? 'bg-red-600 text-white font-semibold'
-                          : selected
-                          ? 'bg-red-600/20 text-red-300 ring-2 ring-red-500'
-                          : 'text-zinc-300 hover:bg-white/10 hover:text-white',
-                      ].join(' ')}
-                    >
-                      {day}
-                      {hasEvents && !todayFlag && (
-                        <span
-                          aria-hidden="true"
-                          className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-red-500"
-                        />
-                      )}
-                    </button>
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* ── Event list ────────────────────────────────────────────────────── */}
-      <div className="border-t border-white/10 px-4 py-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500 mb-2">
-          {displayLabel}
-        </p>
-        {displayedEvents.length > 0 ? (
-          <ul
-            className="space-y-2"
-            aria-label={`Events for ${displayLabel}`}
+        {/* ── Month navigation ──────────────────────────────────────────────── */}
+        <div className="flex items-center justify-between px-4 pt-4 pb-2">
+          <button
+            type="button"
+            onClick={prevMonth}
+            aria-label="Previous month"
+            className="p-1.5 rounded-md text-zinc-400 hover:bg-white/10 hover:text-white text-lg leading-none transition-colors"
           >
-            {displayedEvents.map((event) => (
-              <li key={`${event.date}–${event.title}`} className="flex gap-2 text-sm">
-                <span
-                  aria-hidden="true"
-                  className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-red-500"
-                />
-                <div>
-                  <span className="font-medium text-white">{event.title}</span>
-                  {event.notes && (
-                    <span className="block text-xs text-zinc-500">{event.notes}</span>
-                  )}
-                </div>
-              </li>
+            ‹
+          </button>
+          <h3
+            id={HEADING_ID}
+            aria-live="polite"
+            aria-atomic="true"
+            className="text-sm font-semibold text-white"
+          >
+            {MONTH_NAMES[month]} {year}
+          </h3>
+          <button
+            type="button"
+            onClick={nextMonth}
+            aria-label="Next month"
+            className="p-1.5 rounded-md text-zinc-400 hover:bg-white/10 hover:text-white text-lg leading-none transition-colors"
+          >
+            ›
+          </button>
+        </div>
+
+        {/* ── Day grid ──────────────────────────────────────────────────────── */}
+        {/*
+            APG grid pattern:
+            • role="grid" on <table> (already implied by thead/tbody structure)
+            • aria-labelledby points to the live month heading
+            • Only ONE cell is tabindex=0 at a time (roving tabindex)
+            • Arrow / Home / End / PageUp / PageDown handled in onKeyDown
+            • aria-selected on <td> marks the user-chosen day
+            • abbr on <th> provides full day name to screen readers
+        */}
+        <table
+          className="w-full px-4 pb-3"
+          role="grid"
+          aria-labelledby={HEADING_ID}
+        >
+          <thead>
+            <tr>
+              {DAY_LABELS.map(({ short, full }) => (
+                <th
+                  key={full}
+                  scope="col"
+                  abbr={full}
+                  className="text-center text-xs font-medium text-zinc-500 pb-1.5 w-10"
+                >
+                  {short}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody ref={tbodyRef}>
+            {weeks.map((week, wi) => (
+              <tr key={wi}>
+                {week.map((day, di) => {
+                  if (day === null) {
+                    // Empty padding cell — not interactive, excluded from tab order
+                    return <td key={di} aria-disabled="true" className="w-10 h-10" />;
+                  }
+
+                  const dayEvents  = eventsOnDay(day);
+                  const todayFlag  = isToday(day);
+                  const selected   = selectedDay === day;
+                  const isFocused  = focusedDay === day;
+                  const hasEvents  = dayEvents.length > 0;
+
+                  return (
+                    <td
+                      key={di}
+                      className="w-10 h-10 text-center p-0.5"
+                      aria-selected={selected || undefined}
+                    >
+                      <button
+                        type="button"
+                        data-day={day}
+                        tabIndex={isFocused ? 0 : -1}
+                        onFocus={() => setFocusedDay(day)}
+                        onClick={() => setSelectedDay(selected ? null : day)}
+                        onKeyDown={(e) => handleKeyDown(e, day)}
+                        aria-label={[
+                          `${day} ${MONTH_NAMES[month]} ${year}`,
+                          todayFlag ? 'today' : '',
+                          hasEvents
+                            ? `${dayEvents.length} event${dayEvents.length > 1 ? 's' : ''}`
+                            : '',
+                        ].filter(Boolean).join(', ')}
+                        aria-pressed={selected}
+                        className={[
+                          'relative mx-auto flex items-center justify-center w-8 h-8 rounded-full text-sm transition-colors',
+                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-1 focus-visible:ring-offset-surface',
+                          todayFlag
+                            ? 'bg-red-600 text-white font-semibold'
+                            : selected
+                            ? 'bg-red-600/20 text-red-300 ring-2 ring-red-500'
+                            : 'text-zinc-300 hover:bg-white/10 hover:text-white',
+                        ].join(' ')}
+                      >
+                        {day}
+                        {hasEvents && !todayFlag && (
+                          <span
+                            aria-hidden="true"
+                            className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-red-500"
+                          />
+                        )}
+                      </button>
+                    </td>
+                  );
+                })}
+              </tr>
             ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-zinc-600">No events scheduled.</p>
-        )}
+          </tbody>
+        </table>
+
+        {/* ── Event list ────────────────────────────────────────────────────── */}
+        <div className="border-t border-white/10 px-4 py-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500 mb-2">
+            {displayLabel}
+          </p>
+          {displayedEvents.length > 0 ? (
+            <ul
+              className="space-y-2"
+              aria-label={`Events for ${displayLabel}`}
+            >
+              {displayedEvents.map((event) => (
+                <li key={`${event.date}–${event.title}`} className="flex gap-2 text-sm">
+                  <span
+                    aria-hidden="true"
+                    className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-red-500"
+                  />
+                  <div>
+                    <span className="font-medium text-white">{event.title}</span>
+                    {event.notes && (
+                      <span className="block text-xs text-zinc-500">{event.notes}</span>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-zinc-600">No events scheduled.</p>
+          )}
+        </div>
       </div>
-    </div>
   );
 }

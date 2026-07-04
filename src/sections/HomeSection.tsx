@@ -2,7 +2,7 @@ import VideoHero from '../components/VideoHero';
 
 export default function HomeSection() {
   return (
-    <section id="home" aria-labelledby="hero-heading">
+    <section id="home">
       <VideoHero />
     </section>
   );

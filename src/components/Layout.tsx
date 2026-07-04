@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react';
-import { MDXProvider } from '@mdx-js/react';
-import Header from './Header';
-import Footer from './Footer';
-import { mdxComponents } from '../mdxComponents';
+import type { ReactNode } from "react";
+import { MDXProvider } from "@mdx-js/react";
+import Header from "./Header";
+import Footer from "./Footer";
+import { mdxComponents } from "../mdxComponents";
 
 interface Props {
   children: ReactNode;

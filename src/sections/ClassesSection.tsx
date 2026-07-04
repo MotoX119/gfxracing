@@ -1,16 +1,19 @@
+import SectionContainer from "../components/SectionContainer";
+import SectionHeader from "../components/SectionHeader";
+
 const CLASSES_1_28 = [
-  'Box Stock',
-  'AAA Superstock',
-  'F1',
-  '50+',
-  '2500 Spec',
-  '3500 Lipo Lexan',
-  '2wd Mod',
-  '4wd Mod',
+  "Box Stock",
+  "AAA Superstock",
+  "F1",
+  "50+",
+  "2500 Spec",
+  "3500 Lipo Lexan",
+  "2wd Mod",
+  "4wd Mod",
 ] as const;
 
 const CLASSES_1_10_1_12 = [
-  'TBD'
+  "TBD"
 ] as const;
 
 interface ScaleCardProps {
@@ -30,7 +33,7 @@ function ScaleCard({ scale, subtitle, classes }: ScaleCardProps) {
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage:
-              'repeating-linear-gradient(-45deg, white, white 1px, transparent 1px, transparent 12px)',
+              "repeating-linear-gradient(-45deg, white, white 1px, transparent 1px, transparent 12px)",
           }}
         />
         <p className="relative text-red-200 text-[10px] font-bold uppercase tracking-widest mb-1">
@@ -61,31 +64,16 @@ function ScaleCard({ scale, subtitle, classes }: ScaleCardProps) {
 
 export default function ClassesSection() {
   return (
-    <section
-      id="classes"
-      aria-labelledby="classes-heading"
-      className="py-20 bg-[#0d0d0d] racing-stripe border-t border-white/5"
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Section header */}
+    <SectionContainer id="classes" isStriped={true}>
+        <SectionHeader title="Classes &amp; Rules" />
+        
         <div className="mb-14 text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-            Compete Your Way
-          </p>
-          <h2
-            id="classes-heading"
-            className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white"
-          >
-            Classes &amp; Rules
-          </h2>
-          <div className="mt-4 mx-auto h-1 w-16 bg-red-600 rounded-full" />
-          <p className="mt-6 text-zinc-400 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="text-zinc-400 max-w-xl mx-auto text-sm leading-relaxed">
             GFX★RACING runs competitive classes across three scale platforms.
-            From beginner-friendly Box Stock to open Modified — there's a class for every driver.
+            From beginner-friendly Box Stock to open Modified — there"s a class for every driver.
           </p>
         </div>
-
+        
         {/* Scale cards */}
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           <ScaleCard scale="1/28" subtitle="Mini carpet racing" classes={CLASSES_1_28} />
@@ -95,8 +83,7 @@ export default function ClassesSection() {
         <p className="mt-10 text-center text-xs text-zinc-600">
           Full class specifications and technical rules are available at the track.
         </p>
-      </div>
-    </section>
+    </SectionContainer>
   );
 }
 

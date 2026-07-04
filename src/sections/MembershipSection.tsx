@@ -1,3 +1,6 @@
+import SectionContainer from "../components/SectionContainer";
+import SectionHeader from "../components/SectionHeader";
+
 const plans = [
   {
     key: 'day',
@@ -42,26 +45,8 @@ const plans = [
 
 export default function MembershipSection() {
   return (
-    <section
-      id="membership"
-      aria-labelledby="membership-heading"
-      className="py-20 bg-track border-t border-white/5"
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Section header */}
-        <div className="mb-14 text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-            Get on Track
-          </p>
-          <h2
-            id="membership-heading"
-            className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white"
-          >
-            Membership &amp; Pricing
-          </h2>
-          <div className="mt-4 mx-auto h-1 w-16 bg-red-600 rounded-full" />
-        </div>
+    <SectionContainer id="membership">
+        <SectionHeader title="Membership &amp; Pricing" />
 
         {/* Pricing cards */}
         <div className="grid sm:grid-cols-3 gap-6">
@@ -137,8 +122,7 @@ export default function MembershipSection() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+    </SectionContainer>
   );
 }
 
