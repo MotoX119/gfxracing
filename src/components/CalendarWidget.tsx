@@ -332,7 +332,7 @@ export default function CalendarWidget({ events, className }: {events: CalendarE
 
         {/* ── Event list ────────────────────────────────────────────────────── */}
         <div className="border-t border-white/10 px-4 py-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500 mb-2">
+          <p className="text-lg font-semibold uppercase tracking-wide text-zinc-500 mb-2">
             {displayLabel}
           </p>
           {displayedEvents.length > 0 ? (
@@ -341,7 +341,7 @@ export default function CalendarWidget({ events, className }: {events: CalendarE
               aria-label={`Events for ${displayLabel}`}
             >
               {displayedEvents.map((event) => (
-                <li key={`${event.date}–${event.title}`} className="flex gap-2 text-sm">
+                <li key={`${event.date}–${event.title}`} className="flex gap-2 text-md">
                   <span
                     aria-hidden="true"
                     className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-red-500"
@@ -349,14 +349,14 @@ export default function CalendarWidget({ events, className }: {events: CalendarE
                   <div>
                     <span className="font-medium text-white">{event.title}</span>
                     {event.notes && (
-                      <span className="block text-xs text-zinc-500">{event.notes}</span>
+                      <span className="block text-md text-zinc-500 font-bold">{event.notes}</span>
                     )}
                   </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-zinc-600">No events scheduled.</p>
+            <p className="text-md text-zinc-600">No events scheduled.</p>
           )}
         </div>
       </div>

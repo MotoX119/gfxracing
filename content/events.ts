@@ -21,7 +21,8 @@ export const events: CalendarEvent[] = [
   1. Copy and paste a row below to use as a template
   2. Update the related values (between qoutes)
   **/
-  { date: "2026-07-08", title: "Pete's Peppers!", notes: "I can't believe it either! Pete's peppers!" },
+  { date: "2026-07-07", title: "Dassie's Derby", notes: "There is only one rule. There can be only one! (Highlander rules)" },
+  { date: "2026-07-08", title: "Pete's Peppers!", notes: "I can't believe it either! Pete's peppers! For Pete's sake!" },
   { date: "2026-07-09", title: "Hiss's Disk", notes: "Legendary! Simply legendary." },  
   { date: "2026-07-10", title: "Bodi's heist", notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },
   { date: "2026-08-09", title: "Bodi's second heist", notes: "Doors open at 8:00am.  Qualifying starts at 10:30am" },

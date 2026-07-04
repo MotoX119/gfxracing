@@ -61,7 +61,7 @@ export default function NextEvent({className}:{className?: string;}) {
           <p className="text-white text-2xl sm:text-3xl font-black leading-tight">
             {nextEvent.title}
           </p>
-          <p className="text-red-100 text-lg mt-1">
+          <p className="text-red-100 text-lg font-bold mt-1">
             {formatDay(nextEvent.date)}
             {nextEvent.notes ? ` · ${nextEvent.notes}` : ''}
           </p>
